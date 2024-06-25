@@ -1,7 +1,7 @@
 from . import fmt
-from .opener import Opener
-from .writer import Writer
+from ._opener import Opener
+from ._writer import Writer
 
 __all__ = ["Opener", "fmt", "Writer"]
 
-del opener, writer
+del _opener, _writer

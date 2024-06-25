@@ -12,3 +12,4 @@ class XYZWriter(WriterInterface):
             [f"{iatom:>4s}\t{ixyz[0]:>16s}\t{ixyz[1]:>16s}\t{ixyz[2]:>16s}" for iatom, ixyz in zip(atoms, coords)]
         )
         self.file.writelines(xyzlines)
+        self.file.writelines("\n")

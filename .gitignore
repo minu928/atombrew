@@ -5,6 +5,7 @@ dist
 build
 *.egg-info
 .DS*
+*test*
 ## externsion ignore
 *.pyc
 *.ipynb

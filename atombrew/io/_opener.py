@@ -18,10 +18,6 @@ class Opener(object):
     def database(self):
         return self._database
 
-    @property
-    def data(self):
-        return self._current_data
-
     def load_database(self):
         with open(file=self._filename, mode="r") as file:
             for _ in range(self._fmt_opener.skip_headline_num):
@@ -37,10 +33,6 @@ class Opener(object):
     def reset(self):
         self.frame, self.natoms, self.box = -1, None, []
         self._database = self.load_database()
-        self.nextframe()
-
-    def nextframe(self):
-        self._current_data = next(self.database)
 
     def _set_format(self, fmt: str):
         if fmt == "auto":

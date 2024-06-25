@@ -13,6 +13,7 @@ class EXTXYZWriter(WriterInterface):
         self.file.writelines(self._make_secondline(box=box, **kwrgs))
         xyzlines = "\n".join(self._make_propertyline(atom=atoms, coord=coords, force=kwrgs.get("force", None)))
         self.file.writelines(xyzlines)
+        self.file.writelines("\n")
 
     def _make_secondline(self, box, **kwrgs):
         propeties_words = " Properties=species:S:1:pos:R:3"
