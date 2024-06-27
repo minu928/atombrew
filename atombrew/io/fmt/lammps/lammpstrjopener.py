@@ -5,6 +5,7 @@ from ..._openerinterface import OpenerInterface
 class LAMMPSTRJOpener(OpenerInterface):
     fmt = "lammpstrj"
     _atom_keyword = "type"
+    _numb_additional_lines = 9
 
     def _extract_snapshot(self, firstline: str, file: TextIO) -> list:
         next(file)

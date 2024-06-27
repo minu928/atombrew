@@ -5,6 +5,7 @@ from ..._openerinterface import OpenerInterface
 
 class XYZOpener(OpenerInterface):
     fmt = "xyz"
+    _numb_additional_lines = 2
 
     def __init__(self, cls) -> None:
         super().__init__(cls)

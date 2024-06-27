@@ -5,17 +5,14 @@ from ._openerinterface import openers
 
 class Opener(object):
     supporting_fmt = tuple(openers.keys())
-    frame = 0
-    natoms = 0
-    _box = []
-    _columns = []
+    frame, natoms = 0, 0
+    _box, _columns = [], []
 
     def __init__(self, filename: str, *, fmt: str = "auto") -> None:
         self._filename = filename
         self._fmt = self._set_format(fmt=fmt)
         self._fmt_opener = openers[self._fmt](cls=self)
         self.reset()
-        self.nextframe()
 
     @property
     def database(self):
@@ -37,7 +34,7 @@ class Opener(object):
     def keys(self):
         return {"atom": self._fmt_opener._atom_keyword}
 
-    def load_database(self):
+    def __generate_db(self):
         with open(file=self._filename, mode="r") as file:
             for _ in range(self._fmt_opener.skip_headline_num):
                 next(file)
@@ -52,20 +49,29 @@ class Opener(object):
     def _set_format(self, fmt: str):
         if fmt == "auto":
             fmt = self._filename.split(".")[-1]
-        assert fmt in self.supporting_fmt, f"Not Supporting Format({fmt}), We support ({self.supporting_fmt})"
+        assert fmt in self.supporting_fmt, f"Not Supporting Format({fmt}), We support {self.supporting_fmt}"
         return fmt
 
+    def load_db(self):
+        self._database = self.__generate_db()
+
     def reset(self):
-        self.frame, self.natoms, self._box = -1, None, []
-        self._database = self.load_database()
+        self.frame, self._box = -1, []
+        self.load_db()
+        self.nextframe()
 
     def nextframe(self):
         self._data = next(self.database)
 
     def moveframe(self, frame: int):
-        self.reset()
-        for _ in range(frame):
-            self.nextframe()
+        nlines_per_frame = self.natoms + self._fmt_opener._numb_additional_lines
+        original_skip_headline_num = self._fmt_opener.skip_headline_num
+        self._fmt_opener.skip_headline_num = nlines_per_frame * frame
+        self.frame = frame - 1
+        self._box = []
+        self.load_db()
+        self.nextframe()
+        self._fmt_opener.skip_headline_num = original_skip_headline_num
 
     def frange(self, start: int = 0, end: int = None, step: int = 1, *, verbose: bool = True):
         assert end is None or start < end, "start should be lower than end"

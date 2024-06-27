@@ -4,6 +4,7 @@ from abc import ABCMeta, abstractmethod
 
 class OpenerInterface(metaclass=ABCMeta):
     _atom_keyword = "atom"
+    _numb_additional_lines = None
 
     def __init__(self, cls) -> None:
         self.cls = cls
