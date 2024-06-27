@@ -15,7 +15,7 @@ class WriterInterface(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def write(self, atoms, coords, *, frame=None, box=None, force=None, **kwrgs):
+    def write(self, atoms, coords, *, box=None, force=None, **kwrgs):
         pass
 
 

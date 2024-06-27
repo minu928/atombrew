@@ -4,6 +4,7 @@ from ..._openerinterface import OpenerInterface
 
 class LAMMPSTRJOpener(OpenerInterface):
     fmt = "lammpstrj"
+    _atom_keyword = "type"
 
     def _extract_snapshot(self, firstline: str, file: TextIO) -> list:
         next(file)
@@ -17,5 +18,7 @@ class LAMMPSTRJOpener(OpenerInterface):
         self.update_box(box=box)
         # * Column Line
         columns = file.readline().split()[2:]
+        if "element" in columns:
+            self._atom_keyword = "element"
         self.update_columns(columns=columns)
         return [file.readline().split() for _ in range(natoms)]

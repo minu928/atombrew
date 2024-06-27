@@ -1,3 +1,4 @@
+import numpy as np
 from ..._writerinterface import WriterInterface
 
 
@@ -8,7 +9,7 @@ class EXTXYZWriter(WriterInterface):
         "force": False,
     }
 
-    def write(self, atoms, coords, *, frame=None, box=None, force=None, **kwrgs):
+    def write(self, atoms, coords, *, box=None, force=None, **kwrgs):
         self.file.writelines(f"\t{len(atoms)}\n")
         self.file.writelines(self._make_secondline(box=box, **kwrgs))
         xyzlines = "\n".join(self._make_propertyline(atom=atoms, coord=coords, force=kwrgs.get("force", None)))
@@ -29,7 +30,7 @@ class EXTXYZWriter(WriterInterface):
         return secondline
 
     def _make_propertyline(self, atom, coord, *, force=None):
-        propertyline = [f"{iatom:>4s}\t{ixyz[0]:>16s}\t{ixyz[1]:>16s}\t{ixyz[2]:>16s}" for iatom, ixyz in zip(atom, coord)]
+        propertyline = [f"{iatom[0]:>4s}\t{ixyz[0]:>16f}\t{ixyz[1]:>16f}\t{ixyz[2]:>16f}" for iatom, ixyz in zip(atom, coord)]
         if force is not None:
             propertyline = [
                 f"{p}\t{iforce[0]:>16s}\t{iforce[2]:>16s}\t{iforce[2]:>16s}" for p, iforce in zip(propertyline, force)

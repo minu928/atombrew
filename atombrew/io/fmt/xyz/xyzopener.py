@@ -8,7 +8,7 @@ class XYZOpener(OpenerInterface):
 
     def __init__(self, cls) -> None:
         super().__init__(cls)
-        self.update_columns(np.array(["atoms", "x", "y", "z"]))
+        self.update_columns(np.array(["atom", "x", "y", "z"]))
 
     def _extract_snapshot(self, firstline: str, file: TextIO) -> list:
         next(file)

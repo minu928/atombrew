@@ -10,7 +10,7 @@ del version_dict
 
 
 setup(
-    name="mdbrew",
+    name="atombrew",
     version=version,
     author="Knu",
     author_email="minu928@snu.ac.kr",

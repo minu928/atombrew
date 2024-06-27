@@ -3,6 +3,8 @@ from abc import ABCMeta, abstractmethod
 
 
 class OpenerInterface(metaclass=ABCMeta):
+    _atom_keyword = "atom"
+
     def __init__(self, cls) -> None:
         self.cls = cls
         self.skip_headline_num = 0
@@ -15,7 +17,7 @@ class OpenerInterface(metaclass=ABCMeta):
     def fmt(self) -> str:
         pass
 
-    def extract_snapshot(self, file: TextIO) -> list:
+    def extract_snapshot(self, file: TextIO):
         firstline = file.readline()
         if not firstline:
             raise StopIteration()
@@ -23,20 +25,20 @@ class OpenerInterface(metaclass=ABCMeta):
         return self._extract_snapshot(firstline=firstline, file=file)
 
     @abstractmethod
-    def _extract_snapshot(self, firstline: str, file: TextIO) -> list:
+    def _extract_snapshot(self, firstline: str, file: TextIO):
         pass
 
     def update_frame(self):
         self.cls.frame += 1
 
     def update_box(self, box):
-        self.cls.box = box
+        self.cls._box = box
 
     def update_natoms(self, natoms):
         self.cls.natoms = natoms
 
     def update_columns(self, columns):
-        self.cls.columns = columns
+        self.cls._columns = columns
 
 
 openers: dict[str, type[OpenerInterface]] = {}
