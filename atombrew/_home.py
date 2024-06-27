@@ -44,5 +44,5 @@ class Home(Opener):
         verbose: bool = True,
     ):
         with Writer(filename=filename, mode=mode, fmt=fmt) as f:
-            for frame in self.frange(start=start, end=end, step=step, verbose=verbose):
+            for _ in self.frange(start=start, end=end, step=step, verbose=verbose):
                 f.write(atoms=self.atoms, coords=self.coords, box=self.box)
