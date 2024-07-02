@@ -20,6 +20,7 @@ class Writer(object):
         self.file.close()
 
     def _set_format(self, fmt: str):
+        fmt = fmt.lower()
         if fmt == "auto":
             fmt = self._filename.split(".")[-1]
         assert fmt in self.supporting_fmt, f"Not Supporting Format({fmt}), We support {self.supporting_fmt}"

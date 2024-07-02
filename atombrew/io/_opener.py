@@ -15,6 +15,10 @@ class Opener(object):
         self.reset()
 
     @property
+    def fmt(self):
+        return self._fmt
+
+    @property
     def database(self):
         return self._database
 
@@ -40,13 +44,14 @@ class Opener(object):
                 next(file)
             while True:
                 try:
-                    yield np.array(self._fmt_opener.extract_snapshot(file=file))
+                    yield self._fmt_opener.extract_snapshot(file=file)
                 except StopIteration:
                     break
                 except Exception as e:
                     raise AssertionError(f"Unexpected error: {e}")
 
     def _set_format(self, fmt: str):
+        fmt = str(fmt).lower()
         if fmt == "auto":
             fmt = self._filename.split(".")[-1]
         assert fmt in self.supporting_fmt, f"Not Supporting Format({fmt}), We support {self.supporting_fmt}"
@@ -79,11 +84,11 @@ class Opener(object):
         self.moveframe(start)
         try:
             while self.frame != end:
-                self.nextframe()
                 if (self.frame - start) % step == 0:
-                    if verbose:
-                        bar.update(1)
                     yield self.frame
+                self.nextframe()
+                if verbose:
+                    bar.update(1)
         except StopIteration:
             pass
         except Exception as e:

@@ -1,3 +1,4 @@
+import numpy as np
 from typing import TextIO
 from ..._openerinterface import OpenerInterface
 
@@ -15,11 +16,11 @@ class LAMMPSTRJOpener(OpenerInterface):
         self.update_natoms(natoms=natoms)
         # * Box Line
         next(file)
-        box = [sum([float(b) * (-1) ** (i + 1) for i, b in enumerate(file.readline().split())]) for i in range(3)]
+        box = np.diag([sum([float(b) * (-1) ** (i + 1) for i, b in enumerate(file.readline().split())]) for i in range(3)])
         self.update_box(box=box)
         # * Column Line
         columns = file.readline().split()[2:]
         if "element" in columns:
             self._atom_keyword = "element"
         self.update_columns(columns=columns)
-        return [file.readline().split() for _ in range(natoms)]
+        return np.loadtxt(file, max_rows=natoms, dtype=str)

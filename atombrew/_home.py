@@ -42,7 +42,8 @@ class Home(Opener):
         *,
         fmt: str = "auto",
         verbose: bool = True,
+        **kwrgs
     ):
         with Writer(filename=filename, mode=mode, fmt=fmt) as f:
             for _ in self.frange(start=start, end=end, step=step, verbose=verbose):
-                f.write(atoms=self.atoms, coords=self.coords, box=self.box)
+                f.write(atoms=self.atoms, coords=self.coords, box=self.box, **kwrgs)

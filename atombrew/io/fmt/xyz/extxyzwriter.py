@@ -1,4 +1,3 @@
-import numpy as np
 from ..._writerinterface import WriterInterface
 
 
@@ -19,7 +18,7 @@ class EXTXYZWriter(WriterInterface):
     def _make_secondline(self, box, **kwrgs):
         propeties_words = " Properties=species:S:1:pos:R:3"
         assert box is not None, ValueError("box is None...")
-        secondline = f'Lattice="{box[0]} 0.0 0.0 0.0 {box[1]} 0.0 0.0 0.0 {box[2]}"'
+        secondline = f'Lattice="' + " ".join(box.flatten().astype(str)) + '"'
         for key, val in kwrgs.items():
             if key in self.secondline_properties:
                 secondline += f" {key}={val}"

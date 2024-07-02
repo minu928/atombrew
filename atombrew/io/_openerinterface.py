@@ -1,4 +1,5 @@
 from typing import TextIO
+from numpy.typing import NDArray
 from abc import ABCMeta, abstractmethod
 
 
@@ -18,7 +19,7 @@ class OpenerInterface(metaclass=ABCMeta):
     def fmt(self) -> str:
         pass
 
-    def extract_snapshot(self, file: TextIO):
+    def extract_snapshot(self, file: TextIO) -> NDArray:
         firstline = file.readline()
         if not firstline:
             raise StopIteration()
