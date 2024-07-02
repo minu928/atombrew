@@ -20,5 +20,10 @@ setup(
     packages=find_packages(),
     python_requires=">=3.9",
     package_data={"": ["*"]},
+    entry_points={
+        "console_scripts": [
+            "atb = atombrew.cli.__init__:parsing",
+        ]
+    },
     zip_safe=True,
 )
