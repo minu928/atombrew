@@ -20,7 +20,7 @@ class GROOpener(OpenerInterface):
     def _extract_snapshot(self, firstline: str, file: TextIO) -> list:
         natom = int(file.readline().strip())
         data = np.genfromtxt(file, delimiter=self._width, dtype=str, max_rows=natom)
-        box = np.diag(file.readline().split())
+        box = np.diag([float(i) for i in file.readline().split()])
         self.update_box(box=box)
         self.update_natoms(natoms=natom)
         data = self.__check_data(data=data)

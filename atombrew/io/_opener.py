@@ -11,7 +11,6 @@ class Opener(object):
     def __init__(self, filename: str, *, fmt: str = "auto") -> None:
         self._filename = filename
         self._fmt = self._set_format(fmt=fmt)
-        self._fmt_opener = openers[self._fmt](cls=self)
         self.reset()
 
     @property
@@ -61,9 +60,11 @@ class Opener(object):
         self._database = self.__generate_db()
 
     def reset(self):
+        self._fmt_opener = openers[self._fmt](cls=self)
         self.frame, self._box = -1, []
         self.load_db()
         self.nextframe()
+        return self
 
     def nextframe(self):
         self._data = next(self.database)
