@@ -29,8 +29,8 @@ class GROOpener(OpenerInterface):
     def __check_data(self, data):
         if not self.__is_update_column:
             if "\n" in data[0]:
-                self._width = self._width[:6]
-                data = data[:, :6]
-                self.update_columns(COLMUN[:6])
+                self._width = self._width[:7]
+                data = data[:, :7]
+                self.update_columns(COLMUN[:7])
             self.__is_update_column = True
         return data

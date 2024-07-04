@@ -11,7 +11,7 @@ class Home(Opener):
     def atoms(self) -> np.ndarray:
         if not hasattr(self, "_atom_id"):
             self._atom_id = self.find_index(what=self.keys.get("atom"))
-        return self.data[:, self._atom_id].astype(str)
+        return np.char.strip(self.data[:, self._atom_id])
 
     @property
     def coords(self) -> np.ndarray:
@@ -23,8 +23,8 @@ class Home(Opener):
         return np.where(np.isin(self.columns, what))[0]
 
     def find_atom(self, atom: str):
-        return np.where(self.atoms == atom)[0]
-
+        return np.where(np.char.startswith(self.atoms, atom))[0]
+    
     def brew(self, what: Union[list[str], str] = None, atom: str = None):
         atom_indices = self.find_atom(atom) if atom is not None else slice(None)
         col_indices = self.find_index(what) if what is not None else slice(None)
