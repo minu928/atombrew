@@ -70,6 +70,7 @@ class Opener(object):
         self._data = next(self.database)
 
     def moveframe(self, frame: int):
+        assert frame >= 0 and type(frame) == int, f"frame should be positive integer"
         nlines_per_frame = self.natoms + self._fmt_opener._numb_additional_lines
         original_skip_headline_num = self._fmt_opener.skip_headline_num
         self._fmt_opener.skip_headline_num = nlines_per_frame * frame
@@ -80,6 +81,7 @@ class Opener(object):
         self._fmt_opener.skip_headline_num = original_skip_headline_num
 
     def frange(self, start: int = 0, end: int = None, step: int = 1, *, verbose: bool = True):
+        start, end, step = int(start), int(end), int(step)
         assert end is None or start < end, "start should be lower than end"
         bar = tqdm(unit=" frame")
         self.moveframe(start)
