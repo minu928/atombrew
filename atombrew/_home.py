@@ -1,9 +1,9 @@
 import numpy as np
 from typing import Union
-from .io import Opener, Writer
+from .io import TRJOpener, TRJWriter
 
 
-class Home(Opener):
+class Home(TRJOpener):
     def __init__(self, filename: str, *, fmt: str = "auto") -> None:
         super().__init__(filename, fmt=fmt)
 
@@ -44,6 +44,6 @@ class Home(Opener):
         verbose: bool = True,
         **kwrgs
     ):
-        with Writer(filename=filename, mode=mode, fmt=fmt) as f:
+        with TRJWriter(filename=filename, mode=mode, fmt=fmt) as f:
             for _ in self.frange(start=start, end=end, step=step, verbose=verbose):
                 f.write(atoms=self.atoms, coords=self.coords, box=self.box, **kwrgs)

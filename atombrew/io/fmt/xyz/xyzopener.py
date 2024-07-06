@@ -1,9 +1,9 @@
 import numpy as np
 from typing import TextIO
-from ..._openerinterface import OpenerInterface
+from ..._trjopenerinterface import TRJOpenerInterface
 
 
-class XYZOpener(OpenerInterface):
+class XYZOpener(TRJOpenerInterface):
     fmt = "xyz"
     _numb_additional_lines = 2
 

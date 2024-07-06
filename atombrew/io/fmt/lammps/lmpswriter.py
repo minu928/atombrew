@@ -1,8 +1,8 @@
 import numpy as np
-from ..._writerinterface import WriterInterface
+from ..._trjwriterinterface import TRJWriterInterface
 
 
-class LMPSWriter(WriterInterface):
+class LMPSWriter(TRJWriterInterface):
     fmt = "lmps"
 
     def write(self, atoms, coords, *, box=None, force=None, **kwrgs):

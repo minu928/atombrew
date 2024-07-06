@@ -1,9 +1,7 @@
 from . import fmt
-from ._opener import Opener
-from ._openerinterface import OpenerInterface
-from ._writer import Writer
-from ._writerinterface import WriterInterface
+from ._trjopener import TRJOpener
+from ._trjwriter import TRJWriter
 
-__all__ = ["fmt", "Opener", "OpenerInterface", "Writer", "WriterInterface"]
+__all__ = ["fmt", "TRJOpener", "TRJWriter"]
 
-del _opener, _openerinterface, _writer, _writerinterface
+del _trjopener, _trjwriter

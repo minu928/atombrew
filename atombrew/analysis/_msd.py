@@ -1,9 +1,7 @@
 import numpy as np
 from tqdm import trange
-from atombrew.space import unwrap
 
 
-# Class of Mean Square Displacement
 class MSD(object):
     axis_dict = {"frame": 0, "natoms": 1, "dim": -1}
 

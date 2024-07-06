@@ -3,7 +3,7 @@ from numpy.typing import NDArray
 from abc import ABCMeta, abstractmethod
 
 
-class OpenerInterface(metaclass=ABCMeta):
+class TRJOpenerInterface(metaclass=ABCMeta):
     _atom_keyword = "atom"
     _numb_additional_lines = None
 
@@ -12,7 +12,7 @@ class OpenerInterface(metaclass=ABCMeta):
         self.skip_headline_num = 0
 
     def __init_subclass__(cls) -> None:
-        openers[cls.fmt] = cls
+        trj_openers[cls.fmt] = cls
 
     @property
     @abstractmethod
@@ -43,4 +43,4 @@ class OpenerInterface(metaclass=ABCMeta):
         self.cls._columns = columns
 
 
-openers: dict[str, type[OpenerInterface]] = {}
+trj_openers: dict[str, type[TRJOpenerInterface]] = {}

@@ -1,16 +1,16 @@
 import os
-from ._writerinterface import writers
+from ._trjwriterinterface import trj_writers
 
 
-class Writer(object):
-    supporting_fmt = tuple(writers.keys())
+class TRJWriter(object):
+    supporting_fmt = tuple(trj_writers.keys())
 
     def __init__(self, filename: str, mode="w", *, fmt: str = "auto") -> None:
         assert mode == "w+" or not os.path.isfile(filename), FileExistsError("Already File Exits")
         self._filename = filename
         self._mode = mode
         self.fmt = self._set_format(fmt=fmt)
-        self._fmt_writer = writers[self.fmt]
+        self._fmt_writer = trj_writers[self.fmt]
 
     def __enter__(self):
         self.file = open(self._filename, mode=self._mode)

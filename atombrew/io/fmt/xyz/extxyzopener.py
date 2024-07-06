@@ -1,6 +1,6 @@
 import numpy as np
 from typing import TextIO
-from ..._openerinterface import OpenerInterface
+from ..._trjopenerinterface import TRJOpenerInterface
 
 
 PROPERTY_CANDIDATES = {
@@ -15,7 +15,7 @@ PROPERTY_CANDIDATES = {
 }
 
 
-class EXTXYZOpener(OpenerInterface):
+class EXTXYZOpener(TRJOpenerInterface):
     fmt = "extxyz"
     _numb_additional_lines = 2
     is_update_columns = False

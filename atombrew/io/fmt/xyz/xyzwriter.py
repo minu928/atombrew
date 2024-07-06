@@ -1,7 +1,7 @@
-from ..._writerinterface import WriterInterface
+from ..._trjwriterinterface import TRJWriterInterface
 
 
-class XYZWriter(WriterInterface):
+class XYZWriter(TRJWriterInterface):
     fmt = "xyz"
 
     def write(self, atoms, coords, *, frame=None, box=None, force=None, **kwrgs):

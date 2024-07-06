@@ -1,9 +1,9 @@
 import numpy as np
 from typing import TextIO
-from ..._openerinterface import OpenerInterface
+from ..._trjopenerinterface import TRJOpenerInterface
 
 
-class LMPSOpener(OpenerInterface):
+class LMPSOpener(TRJOpenerInterface):
     fmt = "lmps"
     _atom_keyword = "type"
     _numb_additional_lines = 12

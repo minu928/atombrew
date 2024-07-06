@@ -1,7 +1,7 @@
-from ..._writerinterface import WriterInterface
+from ..._trjwriterinterface import TRJWriterInterface
 
 
-class EXTXYZWriter(WriterInterface):
+class EXTXYZWriter(TRJWriterInterface):
     fmt = "extxyz"
     secondline_properties = ("energy", "stress")
     is_value_exist_dict = {

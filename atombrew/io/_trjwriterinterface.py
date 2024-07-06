@@ -2,12 +2,12 @@ from typing import IO
 from abc import ABCMeta, abstractmethod
 
 
-class WriterInterface(metaclass=ABCMeta):
+class TRJWriterInterface(metaclass=ABCMeta):
     def __init__(self, file: IO) -> None:
         self.file = file
 
     def __init_subclass__(cls) -> None:
-        writers[cls.fmt] = cls
+        trj_writers[cls.fmt] = cls
 
     @property
     @abstractmethod
@@ -19,4 +19,4 @@ class WriterInterface(metaclass=ABCMeta):
         pass
 
 
-writers: dict[str, type[WriterInterface]] = {}
+trj_writers: dict[str, type[TRJWriterInterface]] = {}

@@ -1,13 +1,13 @@
 import numpy as np
 from typing import TextIO
-from ..._openerinterface import OpenerInterface
+from ..._trjopenerinterface import TRJOpenerInterface
 
 
 WIDTH = [5, 5, 5, 5, 8, 8, 8, 8, 8, 8]
 COLMUN = ["resnum", "resname", "atom", "id", "x", "y", "z", "vx", "vy", "vz"]
 
 
-class GROOpener(OpenerInterface):
+class GROOpener(TRJOpenerInterface):
     fmt = "gro"
     _numb_additional_lines = 3
     __is_update_column = False

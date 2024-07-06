@@ -1,9 +1,9 @@
 import numpy as np
 from typing import TextIO
-from ..._openerinterface import OpenerInterface
+from ..._trjopenerinterface import TRJOpenerInterface
 
 
-class LAMMPSTRJOpener(OpenerInterface):
+class LAMMPSTRJOpener(TRJOpenerInterface):
     fmt = "lammpstrj"
     _atom_keyword = "type"
     _numb_additional_lines = 9

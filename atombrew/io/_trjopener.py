@@ -1,10 +1,10 @@
 import numpy as np
 from tqdm import tqdm
-from ._openerinterface import openers
+from ._trjopenerinterface import trj_openers
 
 
-class Opener(object):
-    supporting_fmt = tuple(openers.keys())
+class TRJOpener(object):
+    supporting_fmt = tuple(trj_openers.keys())
     frame, natoms = 0, 0
     _box, _columns = [], []
 
@@ -60,7 +60,7 @@ class Opener(object):
         self._database = self.__generate_db()
 
     def reset(self):
-        self._fmt_opener = openers[self._fmt](cls=self)
+        self._fmt_opener = trj_openers[self._fmt](cls=self)
         self.frame, self._box = -1, []
         self.load_db()
         self.nextframe()

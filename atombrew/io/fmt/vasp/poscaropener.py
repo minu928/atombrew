@@ -1,9 +1,9 @@
 import numpy as np
 from typing import TextIO
-from ..._openerinterface import OpenerInterface
+from ..._trjopenerinterface import TRJOpenerInterface
 
 
-class POSCAROpener(OpenerInterface):
+class POSCAROpener(TRJOpenerInterface):
     fmt = "poscar"
     _numb_additional_lines = 8
 
