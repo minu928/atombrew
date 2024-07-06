@@ -19,6 +19,18 @@ class Home(TRJOpener):
             self._xyz_id = self.find_index(what=["x", "y", "z"])
         return self.data[:, self._xyz_id].astype(float)
 
+    @property
+    def velocities(self) -> np.ndarray:
+        if not hasattr(self, "_vxyz_id"):
+            self._vxyz_id = self.find_index(what=["vx", "vy", "vz"])
+        return self.data[:, self._vxyz_id].astype(float)
+
+    @property
+    def forces(self) -> np.ndarray:
+        if not hasattr(self, "_fxyz_id"):
+            self._fxyz_id = self.find_index(what=["fx", "fy", "fz"])
+        return self.data[:, self._fxyz_id].astype(float)
+
     def find_index(self, what: Union[list[str], str]):
         return np.where(np.isin(self.columns, what))[0]
 
@@ -37,7 +49,7 @@ class Home(TRJOpener):
         filename: str,
         mode: str = "w",
         start: int = 0,
-        end: int = None,
+        stop: int = None,
         step: int = 1,
         *,
         fmt: str = "auto",
@@ -45,5 +57,12 @@ class Home(TRJOpener):
         **kwrgs
     ):
         with TRJWriter(filename=filename, mode=mode, fmt=fmt) as f:
-            for _ in self.frange(start=start, end=end, step=step, verbose=verbose):
-                f.write(atoms=self.atoms, coords=self.coords, box=self.box, **kwrgs)
+            for _ in self.frange(start=start, stop=stop, step=step, verbose=verbose):
+                f.write(
+                    atoms=self.atoms,
+                    coords=self.coords,
+                    box=self.box,
+                    forces=self.forces,
+                    velocities=self.velocities,
+                    **kwrgs,
+                )

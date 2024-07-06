@@ -3,12 +3,11 @@ from ..._trjwriterinterface import TRJWriterInterface
 
 class EXTXYZWriter(TRJWriterInterface):
     fmt = "extxyz"
-    secondline_properties = ("energy", "stress")
     is_value_exist_dict = {
         "force": False,
     }
 
-    def write(self, atoms, coords, *, box=None, force=None, **kwrgs):
+    def write(self, atoms, coords, *, box=None, forces=None, velocities=None, **kwrgs):
         self.file.writelines(f"\t{len(atoms)}\n")
         self.file.writelines(self._make_secondline(box=box, **kwrgs))
         xyzlines = "\n".join(self._make_propertyline(atom=atoms, coord=coords, force=kwrgs.get("force", None)))
@@ -20,9 +19,7 @@ class EXTXYZWriter(TRJWriterInterface):
         assert box is not None, ValueError("box is None...")
         secondline = f'Lattice="' + " ".join(box.flatten().astype(str)) + '"'
         for key, val in kwrgs.items():
-            if key in self.secondline_properties:
-                secondline += f" {key}={val}"
-            elif key in self.is_value_exist_dict:
+            if key in self.is_value_exist_dict:
                 propeties_words += f"{key}:R:3"
                 self.is_value_exist_dict[key] = True
         secondline += ' pbc="True True True"\n'
