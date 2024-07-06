@@ -3,7 +3,7 @@ from typing import TextIO
 from ..._openerinterface import OpenerInterface
 
 
-class XYZOpener(OpenerInterface):
+class POSCAROpener(OpenerInterface):
     fmt = "poscar"
     _numb_additional_lines = 8
 

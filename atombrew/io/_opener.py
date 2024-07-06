@@ -81,7 +81,6 @@ class Opener(object):
         self._fmt_opener.skip_headline_num = original_skip_headline_num
 
     def frange(self, start: int = 0, end: int = None, step: int = 1, *, verbose: bool = True):
-        start, end, step = int(start), int(end), int(step)
         assert end is None or start < end, "start should be lower than end"
         bar = tqdm(unit=" frame")
         self.moveframe(start)
