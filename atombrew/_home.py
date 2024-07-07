@@ -35,7 +35,9 @@ class Home(TRJOpener):
         return np.where(np.isin(self.columns, what))[0]
 
     def find_atom(self, atom: str):
-        return np.where(np.char.startswith(self.atoms, atom))[0]
+        atom_indices = np.where(np.char.startswith(self.atoms, atom))[0]
+        assert atom_indices.size, f"Atom({atom}) is not included in atom"
+        return atom_indices
 
     def brew(self, what: Union[list[str], str] = None, atom: str = None):
         atom_indices = self.find_atom(atom) if atom is not None else slice(None)
@@ -54,7 +56,7 @@ class Home(TRJOpener):
         *,
         fmt: str = "auto",
         verbose: bool = True,
-        **kwrgs
+        **kwrgs,
     ):
         with TRJWriter(filename=filename, mode=mode, fmt=fmt) as f:
             for _ in self.frange(start=start, stop=stop, step=step, verbose=verbose):
