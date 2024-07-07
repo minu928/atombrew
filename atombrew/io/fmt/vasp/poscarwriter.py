@@ -5,7 +5,7 @@ from ..._trjwriterinterface import TRJWriterInterface
 class POSCARWriter(TRJWriterInterface):
     fmt = "poscar"
 
-    def write(self, atoms, coords, *, box=None, forces=None, velocities=None, **kwrgs):
+    def write(self, atoms, coords, forces, velocities, *, box=None, **kwrgs):
         kind, numb = np.unique(atoms, return_counts=True)
         kind_line = "  ".join(kind) + "\n"
         numb_line = "  ".join(numb.astype(str)) + "\n"

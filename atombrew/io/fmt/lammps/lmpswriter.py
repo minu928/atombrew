@@ -5,7 +5,7 @@ from ..._trjwriterinterface import TRJWriterInterface
 class LMPSWriter(TRJWriterInterface):
     fmt = "lmps"
 
-    def write(self, atoms, coords, *, box=None, forces=None, velocities=None, **kwrgs):
+    def write(self, atoms, coords, forces, velocities, *, box=None, **kwrgs):
         atoms = atoms.flatten()
         atomorder = kwrgs.get("atomorder", np.unique((atoms)))
         atomdict = {atom: i + 1 for i, atom in enumerate(atomorder)}

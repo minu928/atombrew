@@ -61,8 +61,8 @@ class Home(TRJOpener):
                 f.write(
                     atoms=self.atoms,
                     coords=self.coords,
-                    box=self.box,
                     forces=self.forces,
                     velocities=self.velocities,
+                    box=self.box,
                     **kwrgs,
                 )

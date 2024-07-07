@@ -4,8 +4,7 @@ __pycache__
 dist
 build
 *.egg-info
-.DS*
-*test*
+*.DS*
+*dev*
 ## externsion ignore
 *.pyc
-*.ipynb

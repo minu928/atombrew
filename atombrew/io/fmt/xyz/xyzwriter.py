@@ -4,7 +4,7 @@ from ..._trjwriterinterface import TRJWriterInterface
 class XYZWriter(TRJWriterInterface):
     fmt = "xyz"
 
-    def write(self, atoms, coords, *, box=None, forces=None, velocities=None, **kwrgs):
+    def write(self, atoms, coords, forces, velocities, *, box=None, **kwrgs):
         natoms = len(atoms)
         self.file.writelines(f"\t{natoms}\n")
         self.file.writelines(f"\n")

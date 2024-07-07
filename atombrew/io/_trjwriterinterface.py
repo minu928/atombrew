@@ -15,7 +15,7 @@ class TRJWriterInterface(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def write(self, atoms, coords, *, box=None, force=None, **kwrgs):
+    def write(self, atoms, coords, forces, velocities, *, box=None, **kwrgs):
         pass
 
 
