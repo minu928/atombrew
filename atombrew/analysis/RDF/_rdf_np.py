@@ -5,9 +5,10 @@ from ._rdfinterface import RDFInterface
 
 class ByNumpy(RDFInterface):
     def __init__(self, a, b, box=None, r_max: float = None, resolution: int = 1000, dtype: str = ...):
+        assert len(a) == len(b), f"Not equal frame of a({len(a)}) and b({len(b)})"
         self.a = np.array(a, dtype=float)
         self.b = np.array(b, dtype=float)
-        self.box = self.__check_box_dim(box=box)
+        self.box = self.__check_box(box=box)
         super().__init__(box, r_max, resolution, dtype)
 
     @property
@@ -31,17 +32,14 @@ class ByNumpy(RDFInterface):
             self._update_hist(unit_a, unit_b, unit_box)
         return self
 
-    def __check_box_dim(self, box):
+    def __check_box(self, box):
         assert box is not None, "Please Input Box"
         box = np.array(box, dtype=float)
-        assert np.prod(box), f"Box shape should be (nframe, 3). not {box.shape}"
-        nframe_box = len(box)
-        nframe_a = len(self.a)
-        nframe_b = len(self.b)
-        assert nframe_a == nframe_b, "a and b frame must be same."
-        if nframe_box == nframe_a:
+        if box.ndim == 3 and box.shape[1:] == (3,3):
+            return np.array([np.diag(b) for b in box])
+        elif box.ndim == 2:
             return box
-        elif box.ndim == 1:
-            return np.tile(box, [nframe_a, 1])
+        elif box.ndim == 1 and len(box) == 3:
+            return np.tile(box, [len(self.a), 1])
         else:
-            raise ValueError(f"Box shape is incorrect, (nframe Box : A : B = {nframe_box} : {nframe_a} : {nframe_b})")
+            raise ValueError(f"Box should be in shape, (nframe, 3, 3), (nframe, 3), (3,)")
