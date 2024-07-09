@@ -1,5 +1,5 @@
 from scipy.constants import Avogadro
-from .tools import count_elements, calc_molecularweights
+from .elements import count_elements, calc_molecularweights
 from ._arithmeticable import Arithmeticalble
 
 
