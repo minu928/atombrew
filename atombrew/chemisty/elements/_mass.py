@@ -1,6 +1,4 @@
-from collections import defaultdict
-
-__all__ = ["to_mass", "count_elements", "calc_molecularweights"]
+__all__ = ["get_mass", "count_elements", "calc_molecularweights"]
 
 
 atom2mass = {
@@ -119,31 +117,13 @@ atom2mass = {
 }
 
 
-def to_mass(element: str):
+def get_mass(element: str):
     assert element in atom2mass, f"{element} is not included."
     return atom2mass[element]
-
-
-def count_elements(elements: str) -> dict[str, int]:
-    element_dict = defaultdict(int)
-    tmp_element = ""
-    for char in elements:
-        if char.isupper():
-            if tmp_element:
-                element_dict[tmp_element] += 1
-                tmp_element = ""
-        elif char.isnumeric():
-            element_dict[tmp_element] += int(char)
-            tmp_element = ""
-            continue
-        tmp_element += char
-    if tmp_element:
-        element_dict[tmp_element] += 1
-    return element_dict
 
 
 def calc_molecularweights(element_count: dict[str, int]):
     mw = 0.0
     for element, num in element_count.items():
-        mw += to_mass(element=element) * num
+        mw += get_mass(element=element) * num
     return mw
