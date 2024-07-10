@@ -23,4 +23,4 @@ def count_elements(elements: str) -> dict[str, int]:
 
 __all__ = ["count_elements" "get_color", "get_mass", "calc_molecularweights"]
 
-del defaultdict, _mass, _color
+del _mass, _color
