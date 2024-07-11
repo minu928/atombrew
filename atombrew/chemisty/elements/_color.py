@@ -111,6 +111,6 @@ _colormap = {
 }
 
 
-def get_color(element: str):
+def get_color(element: str, *, div: int = 1):
     assert element in _colormap, f"Element({element}) is not included"
-    return _colormap[element]
+    return tuple(i / div for i in _colormap[element])
