@@ -80,9 +80,11 @@ class TRJOpener(object):
         self.nextframe()
         self._fmt_opener.skip_headline_num = original_skip_headline_num
 
-    def frange(self, start: int = 0, stop: int = None, step: int = 1, *, verbose: bool = True):
+    def frange(self, start: int = 0, stop: int = None, step: int = 1, *, verbose: bool = True, total: int = None):
         assert stop is None or start < stop, "start should be lower than stop"
-        bar = tqdm(unit=" frame")
+        if stop is not None:
+            total = stop - start
+        bar = tqdm(unit=" frame", total=total)
         self.moveframe(start)
         try:
             while self.frame != stop:
