@@ -20,7 +20,7 @@ class ByNumpy(RDFInterface):
     @property
     def n_b(self):
         if not hasattr(self, "_n_b"):
-            self._n_b = self.a.shape[1]
+            self._n_b = self.b.shape[1]
         return self._n_b
 
     def run(self, start=0, stop=None, step=1):
@@ -35,7 +35,7 @@ class ByNumpy(RDFInterface):
     def __check_box(self, box):
         assert box is not None, "Please Input Box"
         box = np.array(box, dtype=float)
-        if box.ndim == 3 and box.shape[1:] == (3,3):
+        if box.ndim == 3 and box.shape[1:] == (3, 3):
             return np.array([np.diag(b) for b in box])
         elif box.ndim == 2:
             return box
