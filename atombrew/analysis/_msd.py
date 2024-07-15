@@ -6,7 +6,7 @@ class MSD(object):
     axis_dict = {"frame": 0, "natoms": 1, "dim": -1}
 
     def __init__(self, position, *, fft: bool = True, dtype: str = float):
-        self.dtype = str(dtype)
+        self.dtype = dtype
         self.fft = bool(fft)
         self.position = np.array(position, dtype=self.dtype)
         self.nframe = self.position.shape[0]
