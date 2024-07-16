@@ -73,7 +73,7 @@ class TRJOpener(object):
         assert frame >= 0 and type(frame) == int, f"frame should be positive integer"
         nlines_per_frame = self.natoms + self._fmt_opener._numb_additional_lines
         original_skip_headline_num = self._fmt_opener.skip_headline_num
-        self._fmt_opener.skip_headline_num = nlines_per_frame * frame
+        self._fmt_opener.skip_headline_num += nlines_per_frame * frame
         self.frame = frame - 1
         self._box = []
         self.load_db()

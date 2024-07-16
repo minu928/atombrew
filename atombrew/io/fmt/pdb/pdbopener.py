@@ -51,6 +51,7 @@ class PDBOpener(TRJOpenerInterface):
                 usecols=self._not_none_cols,
                 autostrip=True,
             )
+            next(file)
         else:
             start_indices = np.cumsum(np.concatenate(([0], WIDTH[:-1])))
             data = []
