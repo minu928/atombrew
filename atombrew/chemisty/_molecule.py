@@ -22,3 +22,6 @@ class Molecule(Arithmeticalble):
         if verbose:
             print(f"{density} g/cm3 -> {volume:.5f} ang3")
         return volume
+
+    def calc_density(self, volume: float):
+        return self.mw / volume / Avogadro * 1e24
