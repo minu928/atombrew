@@ -70,7 +70,8 @@ class TRJOpener(object):
         self._data = next(self.database)
 
     def moveframe(self, frame: int):
-        assert frame >= 0 and type(frame) == int, f"frame should be positive integer"
+        frame = int(frame)
+        assert frame >= 0, f"frame should be positive integer"
         nlines_per_frame = self.natoms + self._fmt_opener._numb_additional_lines
         original_skip_headline_num = self._fmt_opener.skip_headline_num
         self._fmt_opener.skip_headline_num += nlines_per_frame * frame
