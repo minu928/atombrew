@@ -49,11 +49,11 @@ class Home(TRJOpener):
     def write(
         self,
         filename: str,
-        mode: str = "w",
         start: int = 0,
         stop: int = None,
         step: int = 1,
         *,
+        mode: str = "w",
         fmt: str = "auto",
         verbose: bool = True,
         **kwrgs,
