@@ -85,7 +85,8 @@ class TRJOpener(object):
         assert stop is None or start < stop, "start should be lower than stop"
         if stop is not None:
             total = stop - start
-        bar = tqdm(unit=" frame", total=total)
+        if verbose:
+            bar = tqdm(unit=" frame", total=total)
         self.moveframe(start)
         try:
             while self.frame != stop:
