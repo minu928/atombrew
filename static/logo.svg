@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0  200 100">
+    <style>
+        .hydrogen-fill {
+            fill: #ffffff;
+        }
+
+        .red-fill {
+            fill: #d60000;
+        }
+
+        .black-line {
+            fill: none;
+            stroke: #000000;
+        }
+    </style>
+
+    <!-- 물 분자 (H2O) -->
+    <defs>
+        <g id="water-molecule" transform="translate(0, 0)">
+            <line class="black-line" x1="90" y1="45" x2="100" y2="50" stroke-width="2.5" />
+            <line class="black-line" x1="110" y1="45" x2="100" y2="50" stroke-width="2.5" />
+            <!-- 산소 원자 -->
+            <circle class="red-fill" cx="100" cy="50" r="5" />
+            <circle class="black-line" cx="100" cy="50" r="5" />
+            <!-- 수소 원자 -->
+            <circle class="hydrogen-fill" cx="90" cy="45" r="3" />
+            <circle class="black-line" cx="90" cy="45" r="3" />
+            <circle class="hydrogen-fill" cx="110" cy="45" r="3" />
+            <circle class="black-line" cx="110" cy="45" r="3" />
+        </g>
+    </defs>
+
+    <g transform="translate(0, -20)">
+        <use href="#water-molecule" />
+    </g>
+    <g transform="translate(50, -40) rotate(20)">
+        <use href="#water-molecule" />
+    </g>
+    <g transform="translate(-35, 30) rotate(-20)">
+        <use href="#water-molecule" />
+    </g>
+
+    <!-- 깔때기 (필터) -->
+    <path fill="none" stroke="#2d2d2d" d="M70 55 L130 55 L115 75 85 75 Z" stroke-width="2.5" />
+
+    <!-- 텍스트 -->
+    <text x="100" y="95" font-family="Helvetica" font-size="20" fill="#595757" text-anchor="middle">AtomBrew</text>
+</svg>
