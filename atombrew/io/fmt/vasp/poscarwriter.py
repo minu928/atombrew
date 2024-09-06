@@ -6,6 +6,7 @@ class POSCARWriter(TRJWriterInterface):
     fmt = "poscar"
 
     def write(self, atoms, coords, forces, velocities, *, box=None, **kwrgs):
+        atoms = atoms.flatten()
         kind, numb = np.unique(atoms, return_counts=True)
         kind_line = "  ".join(kind) + "\n"
         numb_line = "  ".join(numb.astype(str)) + "\n"
@@ -18,5 +19,6 @@ class POSCARWriter(TRJWriterInterface):
         self.file.writelines(" " + kind_line)
         self.file.writelines(" " + numb_line)
         self.file.writelines("Cartesian\n")
-        for coord in coords:
-            self.file.writelines(f"{coord[0]:16f} {coord[1]:16f} {coord[2]:16f}\n")
+        for element in kind:
+            for coord in coords[atoms == element]:
+                self.file.writelines(f"{coord[0]:16f} {coord[1]:16f} {coord[2]:16f}\n")
